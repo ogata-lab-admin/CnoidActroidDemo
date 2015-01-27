@@ -1,0 +1,1782 @@
+#VRML V2.0 utf8
+
+PROTO Joint [
+  exposedField     SFVec3f      center              0 0 0
+  exposedField     MFNode       children            []
+  exposedField     MFFloat      llimit              []
+  exposedField     MFFloat      lvlimit             []
+  exposedField     SFRotation   limitOrientation    0 0 1 0
+  exposedField     SFString     name                ""
+  exposedField     SFRotation   rotation            0 0 1 0
+  exposedField     SFVec3f      scale               1 1 1
+  exposedField     SFRotation   scaleOrientation    0 0 1 0
+  exposedField     MFFloat      stiffness           [ 0 0 0 ]
+  exposedField     SFVec3f      translation         0 0 0
+  exposedField     MFFloat      ulimit              []
+  exposedField     MFFloat      uvlimit             []
+  exposedField     SFString     jointType           ""
+  exposedField     SFInt32      jointId             -1
+  exposedField     SFVec3f      jointAxis           0 0 1
+
+  exposedField     SFFloat      gearRatio           1
+  exposedField     SFFloat      rotorInertia        0
+  exposedField     SFFloat      rotorResistor       0
+  exposedField     SFFloat      torqueConst         1
+  exposedField     SFFloat      encoderPulse        1
+]
+{
+  Transform {
+    center           IS center
+    children         IS children
+    rotation         IS rotation
+    scale            IS scale
+    scaleOrientation IS scaleOrientation
+    translation      IS translation
+  }
+}
+
+PROTO Segment [
+  field           SFVec3f     bboxCenter        0 0 0
+  field           SFVec3f     bboxSize          -1 -1 -1
+  exposedField    SFVec3f     centerOfMass      0 0 0
+  exposedField    MFNode      children          [ ]
+  exposedField    SFNode      coord             NULL
+  exposedField    MFNode      displacers        [ ]
+  exposedField    SFFloat     mass              0 
+  exposedField    MFFloat     momentsOfInertia  [ 0 0 0 0 0 0 0 0 0 ]
+  exposedField    SFString    name              ""
+  eventIn         MFNode      addChildren
+  eventIn         MFNode      removeChildren
+]
+{
+  Group {
+    addChildren    IS addChildren
+    bboxCenter     IS bboxCenter
+    bboxSize       IS bboxSize
+    children       IS children
+    removeChildren IS removeChildren
+  }
+}
+
+PROTO Humanoid [
+  field           SFVec3f    bboxCenter            0 0 0
+  field           SFVec3f    bboxSize              -1 -1 -1
+  exposedField    SFVec3f    center                0 0 0
+  exposedField    MFNode     humanoidBody          [ ]
+  exposedField    MFString   info                  [ ]
+  exposedField    MFNode     joints                [ ]
+  exposedField    SFString   name                  ""
+  exposedField    SFRotation rotation              0 0 1 0
+  exposedField    SFVec3f    scale                 1 1 1
+  exposedField    SFRotation scaleOrientation      0 0 1 0
+  exposedField    MFNode     segments              [ ]
+  exposedField    MFNode     sites                 [ ]
+  exposedField    SFVec3f    translation           0 0 0
+  exposedField    SFString   version               "1.1"
+  exposedField    MFNode     viewpoints            [ ]
+]
+{
+  Transform {
+    bboxCenter       IS bboxCenter
+    bboxSize         IS bboxSize
+    center           IS center
+    rotation         IS rotation
+    scale            IS scale
+    scaleOrientation IS scaleOrientation
+    translation      IS translation
+    children [
+      Group {
+        children IS viewpoints
+      }
+      Group {
+        children IS humanoidBody 
+      }
+    ]
+  }
+}
+
+PROTO VisionSensor [
+  exposedField SFVec3f    translation       0 0 0
+  exposedField SFRotation rotation          0 0 1 0
+  exposedField MFNode     children          [ ]
+  exposedField SFFloat    fieldOfView       0.785398
+  exposedField SFString   name              ""
+  exposedField SFFloat    frontClipDistance 0.01
+  exposedField SFFloat    backClipDistance  10.0
+  exposedField SFString   type              "NONE"
+  exposedField SFInt32    sensorId          -1
+  exposedField SFInt32    width             320
+  exposedField SFInt32    height            240
+  exposedField SFFloat    frameRate         30
+]
+{
+  Transform {
+    rotation         IS rotation
+    translation      IS translation
+    children         IS children
+  }
+}
+
+
+PROTO ForceSensor [  
+  exposedField SFVec3f    maxForce    -1 -1 -1
+  exposedField SFVec3f    maxTorque   -1 -1 -1
+  exposedField SFVec3f    translation 0 0 0
+  exposedField SFRotation rotation    0 0 1 0
+  exposedField MFNode     children          [ ]
+  exposedField SFInt32    sensorId    -1
+]
+{
+  Transform {
+    translation IS translation
+    rotation    IS rotation
+    children    IS children
+  }
+}
+
+PROTO Gyro [
+  exposedField SFVec3f    maxAngularVelocity -1 -1 -1
+  exposedField SFVec3f    translation        0 0 0
+  exposedField SFRotation rotation           0 0 1 0
+  exposedField MFNode     children          [ ]
+  exposedField SFInt32    sensorId           -1
+]
+{
+  Transform {
+    translation IS translation
+    rotation    IS rotation
+    children    IS children
+  }
+}
+
+PROTO AccelerationSensor [
+  exposedField SFVec3f    maxAcceleration -1 -1 -1
+  exposedField SFVec3f    translation     0 0 0
+  exposedField SFRotation rotation        0 0 1 0
+  exposedField MFNode     children          [ ]
+  exposedField SFInt32    sensorId        -1
+]
+{
+  Transform {
+    translation IS translation
+    rotation    IS rotation
+    children    IS children
+  }
+}
+
+PROTO RangeSensor [
+  exposedField SFVec3f    translation     0 0 0
+  exposedField SFRotation rotation        0 0 1 0
+  exposedField MFNode     children        [ ]
+  exposedField SFInt32    sensorId        -1
+  exposedField SFFloat    scanAngle       3.14159 #[rad]
+  exposedField SFFloat    scanStep        0.1     #[rad]
+  exposedField SFFloat    scanRate        10      #[Hz]
+  exposedField SFFloat    maxDistance	    10
+]
+{
+  Transform {
+    translation IS translation
+    rotation    IS rotation
+    children    IS children
+  }
+}
+
+PROTO Plane [
+  exposedField SFVec3f size 10 10 0
+]
+{
+  Box {
+    size IS size
+  }
+}
+
+PROTO ExtraJoint [
+  exposedField SFString 	link1Name 		""
+  exposedField SFString 	link2Name 		""
+  exposedField SFVec3f  	link1LocalPos	0 0 0
+  exposedField SFVec3f  	link2LocalPos	0 0 0
+  exposedField SFString 	jointType 		"xyz"
+  exposedField SFVec3f	jointAxis 		1 0 0
+]
+{
+}
+
+NavigationInfo {
+  avatarSize    0.5
+  headlight     TRUE
+  type  ["EXAMINE", "ANY"]
+}
+
+Background {
+  skyColor 0.4 0.6 0.4
+}
+
+Viewpoint {
+  position    3 0 0.835
+  orientation 0.5770 0.5775 0.5775 2.0935
+}
+
+DEF actroid Humanoid{
+  humanoidBody [
+    DEF root Joint {
+      jointType "free"
+      ulimit [0.0 0.0 ]
+      llimit [0.0 0.0 ]
+      uvlimit [0.0 0.0 ]
+      lvlimit [0.0 0.0 ]
+      rotorInertia 1.0
+      rotorResistor 1.0
+      children[
+        DEF chair Segment{
+          centerOfMass 0.0 0.0 0.0 
+          mass 0.0 
+          momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+          children[
+            Transform {
+              translation 0.05 0 0.2025 
+              children[
+                Shape{
+                  geometry Box{
+                    size 0.5 0.405 0.405
+                  }
+                  appearance Appearance{
+                    material Material{
+                      diffuseColor 0.8 0.8 0.8
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+        DEF waist0 Joint {
+          jointType "rotate"
+          jointId 23
+          jointAxis 0.0 0.0 1.0 
+          translation 0 0 0.405 
+          ulimit [2.0 0.0 ]
+          llimit [-2.0 0.0 ]
+          uvlimit [0.0 0.0 ]
+          lvlimit [0.0 0.0 ]
+          rotorInertia 1.0
+          rotorResistor 1.0
+          children[
+            Transform {
+              translation 0 0 0 
+              rotation 1 0 0 1.58 
+              children[
+                DEF waist0 Segment{
+                  centerOfMass 0.0 0.0 0.0 
+                  mass 0.0 
+                  momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                  children[
+                    Transform {
+                      translation 0 0.025 -0 
+                      children[
+                        Shape{
+                          geometry Cylinder{
+                            radius 0.07
+                            height 0.05
+                          }
+                          appearance Appearance{
+                            material Material{
+                              diffuseColor 0.8 0.8 0.8
+                            }
+                          }
+                        }
+                      ]
+                    }
+                    Transform {
+                      translation 0 0.05 -0 
+                      children[
+                        Shape{
+                          geometry Box{
+                            size 0.07 0.07 0.1
+                          }
+                          appearance Appearance{
+                            material Material{
+                              diffuseColor 0.8 0.8 0.8
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+                  ]
+                }
+            DEF waist1 Joint {
+              jointType "rotate"
+              jointId 22
+              jointAxis 0.0 1.0 0.0 
+              translation 0 0 0.1 
+              ulimit [1.0 0.0 ]
+              llimit [-1.0 0.0 ]
+              uvlimit [0.0 0.0 ]
+              lvlimit [0.0 0.0 ]
+              rotorInertia 1.0
+              rotorResistor 1.0
+              children[
+                DEF waist1 Segment{
+                  centerOfMass 0.0 0.0 0.0 
+                  mass 0.0 
+                  momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                  children[
+                    Transform {
+                      children[
+                        Shape{
+                          geometry Cylinder{
+                            radius 0.03
+                            height 0.1
+                          }
+                          appearance Appearance{
+                            material Material{
+                              diffuseColor 0.8 0.8 0.8
+                            }
+                          }
+                        }
+                      ]
+                    }
+                    Transform {
+                      translation 0 0 0.1 
+                      children[
+                        Shape{
+                          geometry Box{
+                            size 0.05 0.08 0.2
+                          }
+                          appearance Appearance{
+                            material Material{
+                              diffuseColor 0.8 0.8 0.8
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+                DEF waist2 Joint {
+                  jointType "rotate"
+                  jointAxis 0.0 1.0 0.0 
+                  translation 0 0 0.2 
+                  ulimit [0.0 0.0 ]
+                  llimit [0.0 0.0 ]
+                  uvlimit [0.0 0.0 ]
+                  lvlimit [0.0 0.0 ]
+                  rotorInertia 1.0
+                  rotorResistor 1.0
+                  children[
+                    DEF waist1 Segment{
+                      centerOfMass 0.0 0.0 0.0 
+                      mass 0.0 
+                      momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                      children[
+                        Transform {
+                          children[
+                            Shape{
+                              geometry Cylinder{
+                                radius 0.03
+                                height 0.1
+                              }
+                              appearance Appearance{
+                                material Material{
+                                  diffuseColor 0.8 0.8 0.8
+                                }
+                              }
+                            }
+                          ]
+                        }
+                        Transform {
+                          translation 0 0 0.115 
+                          children[
+                            Shape{
+                              geometry Box{
+                                size 0.05 0.08 0.23
+                              }
+                              appearance Appearance{
+                                material Material{
+                                  diffuseColor 0.8 0.8 0.8
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    DEF l0 Joint {
+                      jointType "rotate"
+                      jointId 8
+                      jointAxis 0.0 -1.0 0.0 
+                      translation 0 0 0.2 
+                      ulimit [2.094 0] 
+                      llimit [-0.3142 0.0 ]
+                      uvlimit [0.0 0.0 ]
+                      lvlimit [0.0 0.0 ]
+                      rotorInertia 1.0
+                      rotorResistor 1.0
+                      children[
+                        DEF l0 Segment{
+                          centerOfMass 0.0 0.0 0.0 
+                          mass 0.0 
+                          momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                          children[
+                            Transform {
+                              translation 0 0.06 0 
+                              children[
+                                Shape{
+                                  geometry Cylinder{
+                                    radius 0.03
+                                    height 0.1
+                                  }
+                                  appearance Appearance{
+                                    material Material{
+                                      diffuseColor 0.1 0.1 0.1
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                            Transform {
+                              translation 0 0.14 0 
+                              children[
+                                Shape{
+                                  geometry Box{
+                                    size 0.05 0.085 0.05
+                                  }
+                                  appearance Appearance{
+                                    material Material{
+                                      diffuseColor 0.1 0.1 0.1
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                        DEF l1 Joint {
+                          jointType "rotate"
+                          jointId 9
+                          jointAxis 1.0 0.0 0.0 
+                          translation 0 0.171 0 
+                          ulimit [1.012 0] 
+                          llimit [-0.2618 0.0 ]
+                          uvlimit [0.0 0.0 ]
+                          lvlimit [0.0 0.0 ]
+                          rotorInertia 1.0
+                          rotorResistor 1.0
+                          children[
+                            DEF j1 Segment{
+                              centerOfMass 0.0 0.0 0.0 
+                              mass 0.0 
+                              momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                              children[
+                                Transform {
+                                  translation 0.025 0 0 
+                                  rotation 0 0 1 1.58 
+                                  children[
+                                    Shape{
+                                      geometry Cylinder{
+                                        radius 0.025
+                                        height 0.01
+                                      }
+                                      appearance Appearance{
+                                        material Material{
+                                          diffuseColor 0.8 0.2 0.2
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                                Transform {
+                                  translation -0.025 0 0 
+                                  rotation 0 0 1 1.58 
+                                  children[
+                                    Shape{
+                                      geometry Cylinder{
+                                        radius 0.025
+                                        height 0.01
+                                      }
+                                      appearance Appearance{
+                                        material Material{
+                                          diffuseColor 0.8 0.2 0.2
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                                Transform {
+                                  translation 0 0 -0.025 
+                                  children[
+                                    Shape{
+                                      geometry Box{
+                                        size 0.05 0.05 0.05
+                                      }
+                                      appearance Appearance{
+                                        material Material{
+                                          diffuseColor 0.8 0.2 0.2
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                            DEF l2 Joint {
+                              jointType "rotate"
+                              jointId 10
+                              jointAxis 0.0 0.0 -1.0 
+                              ulimit [0.7854 0] 
+                              llimit [-0.7854 0.0 ]
+                              uvlimit [0.0 0.0 ]
+                              lvlimit [0.0 0.0 ]
+                              rotorInertia 1.0
+                              rotorResistor 1.0
+                              children[
+                                DEF l2 Segment{
+                                  centerOfMass 0.0 0.0 0.0 
+                                  mass 0.0 
+                                  momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                                  children[
+                                    Transform {
+                                      translation 0 0 -0.075 
+                                      rotation 1 0 0 1.58 
+                                      children[
+                                        Shape{
+                                          geometry Cylinder{
+                                            radius 0.03
+                                            height 0.05
+                                          }
+                                          appearance Appearance{
+                                            material Material{
+                                              diffuseColor 1.0 0.1 0.1
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                    Transform {
+                                      translation 0 0 -0.16 
+                                      children[
+                                        Shape{
+                                          geometry Box{
+                                            size 0.05 0.05 0.125
+                                          }
+                                          appearance Appearance{
+                                            material Material{
+                                              diffuseColor 0.9 0.1 0.1
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                                DEF l3 Joint {
+                                  jointType "rotate"
+                                  jointId 11
+                                  jointAxis 0.0 -1.0 0.0 
+                                  translation 0.009 0 -0.2375 
+                                  ulimit [2.4434 0.0] 
+                                  llimit [0.3491 0.0 ]
+                                  uvlimit [0.0 0.0 ]
+                                  lvlimit [0.0 0.0 ]
+                                  rotorInertia 1.0
+                                  rotorResistor 1.0
+                                  children[
+                                    DEF l3 Segment{
+                                      centerOfMass 0.0 0.0 0.0 
+                                      mass 0.0 
+                                      momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                                      children[
+                                        Transform {
+                                          translation 0 0.025 0 
+                                          children[
+                                            Shape{
+                                              geometry Cylinder{
+                                                radius 0.025
+                                                height 0.01
+                                              }
+                                              appearance Appearance{
+                                                material Material{
+                                                  diffuseColor 0.9 0.9 0.1
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                        Transform {
+                                          translation 0 -0.025 0 
+                                          children[
+                                            Shape{
+                                              geometry Cylinder{
+                                                radius 0.025
+                                                height 0.01
+                                              }
+                                              appearance Appearance{
+                                                material Material{
+                                                  diffuseColor 0.9 0.9 0.1
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                        Transform {
+                                          translation 0 0 -0.025 
+                                          children[
+                                            Shape{
+                                              geometry Box{
+                                                size 0.05 0.05 0.05
+                                              }
+                                              appearance Appearance{
+                                                material Material{
+                                                  diffuseColor 0.9 0.9 0.1
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                    DEF l4 Joint {
+                                      jointType "rotate"
+                                      jointId 12
+                                      jointAxis 0.0 0.0 -1.0 
+                                      ulimit [1.571 0] 
+                                      llimit [-1.134 0.0 ]
+                                      uvlimit [0.0 0.0 ]
+                                      lvlimit [0.0 0.0 ]
+                                      rotorInertia 1.0
+                                      rotorResistor 1.0
+                                      children[
+                                        DEF l4 Segment{
+                                          centerOfMass 0.0 0.0 0.0 
+                                          mass 0.0 
+                                          momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                                          children[
+                                            Transform {
+                                              translation 0 0 -0.075 
+                                              rotation 1 0 0 1.58 
+                                              children[
+                                                Shape{
+                                                  geometry Cylinder{
+                                                    radius 0.03
+                                                    height 0.05
+                                                  }
+                                                  appearance Appearance{
+                                                    material Material{
+                                                      diffuseColor 0.1 0.9 0.1
+                                                    }
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                            Transform {
+                                              translation 0 0 -0.17 
+                                              children[
+                                                Shape{
+                                                  geometry Box{
+                                                    size 0.04 0.04 0.14
+                                                  }
+                                                  appearance Appearance{
+                                                    material Material{
+                                                      diffuseColor 0.1 0.9 0.1
+                                                    }
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                        DEF l5 Joint {
+                                          jointType "rotate"
+                                          jointId 14
+                                          jointAxis 1.0 0.0 0.0 
+                                          translation 0 0 -0.24 
+                                          ulimit [0.4509 0] 
+                                          llimit [-0.2698 0.0 ]
+                                          uvlimit [0.0 0.0 ]
+                                          lvlimit [0.0 0.0 ]
+                                          rotorInertia 1.0
+                                          rotorResistor 1.0
+                                          children[
+                                            DEF l5 Segment{
+                                              centerOfMass 0.0 0.0 0.0 
+                                              mass 0.0 
+                                              momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                                              children[
+                                                Transform {
+                                                  translation 0.025 0 0 
+                                                  rotation 0 0 1 1.58 
+                                                  children[
+                                                    Shape{
+                                                      geometry Cylinder{
+                                                        radius 0.025
+                                                        height 0.01
+                                                      }
+                                                      appearance Appearance{
+                                                        material Material{
+                                                          diffuseColor 0.1 0.1 0.9
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                                Transform {
+                                                  translation -0.025 0 0 
+                                                  rotation 0 0 1 1.58 
+                                                  children[
+                                                    Shape{
+                                                      geometry Cylinder{
+                                                        radius 0.025
+                                                        height 0.01
+                                                      }
+                                                      appearance Appearance{
+                                                        material Material{
+                                                          diffuseColor 0.1 0.1 0.9
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                            DEF l6 Joint {
+                                              jointType "rotate"
+                                              jointId 13
+                                              jointAxis 0.0 -1.0 0.0 
+                                              translation 0 0 -0.02 
+                                              ulimit [0.4961 0] 
+                                              llimit [-0.6872 0.0 ]
+                                              uvlimit [0.0 0.0 ]
+                                              lvlimit [0.0 0.0 ]
+                                              rotorInertia 1.0
+                                              rotorResistor 1.0
+                                              children[
+                                                DEF l6 Segment{
+                                                  centerOfMass 0.0 0.0 0.0 
+                                                  mass 0.0 
+                                                  momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                                                  children[
+                                                    Transform {
+                                                      translation 0 0 -0.075 
+                                                      children[
+                                                        Shape{
+                                                          geometry Box{
+                                                            size 0.1 0.03 0.15
+                                                          }
+                                                          appearance Appearance{
+                                                            material Material{
+                                                              diffuseColor 0.9 0.1 0.9
+                                                            }
+                                                          }
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                                DEF l7 Joint {
+                                                  jointType "rotate"
+                                                  jointId 24
+                                                  jointAxis 0.0 -1.0 0.0 
+                                                  translation 0 0 -0.02 
+                                                  ulimit [1.0 0] 
+                                                  llimit [0.0 0.0 ]
+                                                  uvlimit [0.0 0.0 ]
+                                                  lvlimit [0.0 0.0 ]
+                                                  rotorInertia 1.0
+                                                  rotorResistor 1.0
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    DEF r0 Joint {
+                      jointType "rotate"
+                      jointId 15
+                      jointAxis 0.0 -1.0 0.0 
+                      translation 0 0 0.2 
+                      ulimit [2.094 0] 
+                      llimit [-0.3142 0.0 ]
+                      uvlimit [0.0 0.0 ]
+                      lvlimit [0.0 0.0 ]
+                      rotorInertia 1.0
+                      rotorResistor 1.0
+                      children[
+                        DEF r0 Segment{
+                          centerOfMass 0.0 0.0 0.0 
+                          mass 0.0 
+                          momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                          children[
+                            Transform {
+                              translation 0 -0.06 0 
+                              children[
+                                Shape{
+                                  geometry Cylinder{
+                                    radius 0.03
+                                    height 0.1
+                                  }
+                                  appearance Appearance{
+                                    material Material{
+                                      diffuseColor 0.1 0.1 0.1
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                            Transform {
+                              translation 0 -0.13 0 
+                              children[
+                                Shape{
+                                  geometry Box{
+                                    size 0.05 0.085 0.05
+                                  }
+                                  appearance Appearance{
+                                    material Material{
+                                      diffuseColor 0.1 0.1 0.1
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                        DEF r1 Joint {
+                          jointType "rotate"
+                          jointId 16
+                          jointAxis -1.0 0.0 0.0 
+                          translation 0 -0.171 0 
+                          ulimit [1.012 0] 
+                          llimit [-0.2618 0.0 ]
+                          uvlimit [0.0 0.0 ]
+                          lvlimit [0.0 0.0 ]
+                          rotorInertia 1.0
+                          rotorResistor 1.0
+                          children[
+                            DEF r1 Segment{
+                              centerOfMass 0.0 0.0 0.0 
+                              mass 0.0 
+                              momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                              children[
+                                Transform {
+                                  translation 0.025 0 0 
+                                  rotation 0 0 1 1.58 
+                                  children[
+                                    Shape{
+                                      geometry Cylinder{
+                                        radius 0.025
+                                        height 0.01
+                                      }
+                                      appearance Appearance{
+                                        material Material{
+                                          diffuseColor 0.8 0.2 0.2
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                                Transform {
+                                  translation -0.025 0 0 
+                                  rotation 0 0 1 1.58 
+                                  children[
+                                    Shape{
+                                      geometry Cylinder{
+                                        radius 0.025
+                                        height 0.01
+                                      }
+                                      appearance Appearance{
+                                        material Material{
+                                          diffuseColor 0.8 0.2 0.2
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                                Transform {
+                                  translation 0 0 -0.025 
+                                  children[
+                                    Shape{
+                                      geometry Box{
+                                        size 0.05 0.05 0.05
+                                      }
+                                      appearance Appearance{
+                                        material Material{
+                                          diffuseColor 0.8 0.2 0.2
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                            DEF r2 Joint {
+                              jointType "rotate"
+                              jointId 17
+                              jointAxis 0.0 0.0 1.0 
+                              ulimit [0.7854 0] 
+                              llimit [-0.7854 0.0 ]
+                              uvlimit [0.0 0.0 ]
+                              lvlimit [0.0 0.0 ]
+                              rotorInertia 1.0
+                              rotorResistor 1.0
+                              children[
+                                DEF r2 Segment{
+                                  centerOfMass 0.0 0.0 0.0 
+                                  mass 0.0 
+                                  momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                                  children[
+                                    Transform {
+                                      translation 0 0 -0.075 
+                                      rotation 1 0 0 1.58 
+                                      children[
+                                        Shape{
+                                          geometry Cylinder{
+                                            radius 0.03
+                                            height 0.05
+                                          }
+                                          appearance Appearance{
+                                            material Material{
+                                              diffuseColor 1.0 0.1 0.1
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                    Transform {
+                                      translation 0 0 -0.16 
+                                      children[
+                                        Shape{
+                                          geometry Box{
+                                            size 0.05 0.05 0.125
+                                          }
+                                          appearance Appearance{
+                                            material Material{
+                                              diffuseColor 0.9 0.1 0.1
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                                DEF r3 Joint {
+                                  jointType "rotate"
+                                  jointId 18
+                                  jointAxis 0.0 -1.0 0.0 
+                                  translation 0.009 0 -0.2375 
+                                  ulimit [2.444 0] 
+                                  llimit [-0.3491 0.0 ]
+                                  uvlimit [0.0 0.0 ]
+                                  lvlimit [0.0 0.0 ]
+                                  rotorInertia 1.0
+                                  rotorResistor 1.0
+                                  children[
+                                    DEF r3 Segment{
+                                      centerOfMass 0.0 0.0 0.0 
+                                      mass 0.0 
+                                      momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                                      children[
+                                        Transform {
+                                          translation 0 0.025 0 
+                                          children[
+                                            Shape{
+                                              geometry Cylinder{
+                                                radius 0.025
+                                                height 0.01
+                                              }
+                                              appearance Appearance{
+                                                material Material{
+                                                  diffuseColor 0.9 0.9 0.1
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                        Transform {
+                                          translation 0 -0.025 0 
+                                          children[
+                                            Shape{
+                                              geometry Cylinder{
+                                                radius 0.025
+                                                height 0.01
+                                              }
+                                              appearance Appearance{
+                                                material Material{
+                                                  diffuseColor 0.9 0.9 0.1
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                        Transform {
+                                          translation 0 0 -0.025 
+                                          children[
+                                            Shape{
+                                              geometry Box{
+                                                size 0.05 0.05 0.05
+                                              }
+                                              appearance Appearance{
+                                                material Material{
+                                                  diffuseColor 0.9 0.9 0.1
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                    DEF r4 Joint {
+                                      jointType "rotate"
+                                      jointId 19
+                                      jointAxis 0.0 0.0 1.0 
+                                      ulimit [1.571 0] 
+                                      llimit [-1.135 0.0 ]
+                                      uvlimit [0.0 0.0 ]
+                                      lvlimit [0.0 0.0 ]
+                                      rotorInertia 1.0
+                                      rotorResistor 1.0
+                                      children[
+                                        DEF r4 Segment{
+                                          centerOfMass 0.0 0.0 0.0 
+                                          mass 0.0 
+                                          momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                                          children[
+                                            Transform {
+                                              translation 0 0 -0.075 
+                                              rotation 1 0 0 1.58 
+                                              children[
+                                                Shape{
+                                                  geometry Cylinder{
+                                                    radius 0.03
+                                                    height 0.05
+                                                  }
+                                                  appearance Appearance{
+                                                    material Material{
+                                                      diffuseColor 0.1 0.9 0.1
+                                                    }
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                            Transform {
+                                              translation 0 0 -0.17 
+                                              children[
+                                                Shape{
+                                                  geometry Box{
+                                                    size 0.04 0.04 0.14
+                                                  }
+                                                  appearance Appearance{
+                                                    material Material{
+                                                      diffuseColor 0.1 0.9 0.1
+                                                    }
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                        DEF r5 Joint {
+                                          jointType "rotate"
+                                          jointId 21
+                                          jointAxis -1.0 0.0 0.0 
+                                          translation 0 0 -0.24 
+                                          ulimit [0.4509 0] 
+                                          llimit [-0.2698 0.0 ]
+                                          uvlimit [0.0 0.0 ]
+                                          lvlimit [0.0 0.0 ]
+                                          rotorInertia 1.0
+                                          rotorResistor 1.0
+                                          children[
+                                            DEF r5 Segment{
+                                              centerOfMass 0.0 0.0 0.0 
+                                              mass 0.0 
+                                              momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                                              children[
+                                                Transform {
+                                                  translation 0.025 0 0 
+                                                  rotation 0 0 1 1.58 
+                                                  children[
+                                                    Shape{
+                                                      geometry Cylinder{
+                                                        radius 0.025
+                                                        height 0.01
+                                                      }
+                                                      appearance Appearance{
+                                                        material Material{
+                                                          diffuseColor 0.1 0.1 0.9
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                                Transform {
+                                                  translation -0.025 0 0 
+                                                  rotation 0 0 1 1.58 
+                                                  children[
+                                                    Shape{
+                                                      geometry Cylinder{
+                                                        radius 0.025
+                                                        height 0.01
+                                                      }
+                                                      appearance Appearance{
+                                                        material Material{
+                                                          diffuseColor 0.1 0.1 0.9
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                            DEF r6 Joint {
+                                              jointType "rotate"
+                                              jointId 20
+                                              jointAxis 0.0 -1.0 0.0 
+                                              translation 0 0 -0.02 
+                                              ulimit [0.4961 0.0] 
+                                              llimit [-0.6872 0.0 ]
+                                              uvlimit [0.0 0.0 ]
+                                              lvlimit [0.0 0.0 ]
+                                              rotorInertia 1.0
+                                              rotorResistor 1.0
+                                              children[
+                                                DEF r6 Segment{
+                                                  centerOfMass 0.0 0.0 0.0 
+                                                  mass 0.0 
+                                                  momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                                                  children[
+                                                    Transform {
+                                                      translation 0 0 -0.075 
+                                                      children[
+                                                        Shape{
+                                                          geometry Box{
+                                                            size 0.1 0.03 0.15
+                                                          }
+                                                          appearance Appearance{
+                                                            material Material{
+                                                              diffuseColor 0.9 0.1 0.9
+                                                            }
+                                                          }
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    DEF n0 Joint {
+                      jointType "rotate"
+                      jointId 7
+                      jointAxis 0.0 1.0 0.0 
+                      translation 0 0 0.23 
+                      ulimit [1.0 0.0 ]
+                      llimit [-1.0 0.0 ]
+                      uvlimit [0.0 0.0 ]
+                      lvlimit [0.0 0.0 ]
+                      rotorInertia 1.0
+                      rotorResistor 1.0
+                      children[
+                        DEF n0 Segment{
+                          centerOfMass 0.0 0.0 0.0 
+                          mass 0.0 
+                          momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                          children[
+                            Transform {
+                              children[
+                                Shape{
+                                  geometry Cylinder{
+                                    radius 0.02
+                                    height 0.1
+                                  }
+                                  appearance Appearance{
+                                    material Material{
+                                      diffuseColor 0.8 0.8 0.8
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                        DEF n1 Joint {
+                          jointType "rotate"
+                          jointId 6
+                          jointAxis 0.0 0.0 1.0 
+                          ulimit [1.0 0.0 ]
+                          llimit [-1.0 0.0 ]
+                          uvlimit [0.0 0.0 ]
+                          lvlimit [0.0 0.0 ]
+                          rotorInertia 1.0
+                          rotorResistor 1.0
+                          children[
+                            DEF n1 Segment{
+                              centerOfMass 0.0 0.0 0.0 
+                              mass 0.0 
+                              momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                              children[
+                                Transform {
+                                  translation 0 0 0.025 
+                                  rotation 1 0 0 1.58 
+                                  children[
+                                    Shape{
+                                      geometry Cylinder{
+                                        radius 0.03
+                                        height 0.05
+                                      }
+                                      appearance Appearance{
+                                        material Material{
+                                          diffuseColor 0.8 0.8 0.8
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                            DEF n2 Joint {
+                              jointType "rotate"
+                              jointId 5
+                              jointAxis 1.0 0.0 0.0 
+                              translation 0 0 0.07 
+                              ulimit [1.0 0.0 ]
+                              llimit [-1.0 0.0 ]
+                              uvlimit [0.0 0.0 ]
+                              lvlimit [0.0 0.0 ]
+                              rotorInertia 1.0
+                              rotorResistor 1.0
+                              children[
+                                DEF n2 Segment{
+                                  centerOfMass 0.0 0.0 0.0 
+                                  mass 0.0 
+                                  momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                                  children[
+                                    Transform {
+                                      rotation 0 0 1 1.58 
+                                      children[
+                                        Shape{
+                                          geometry Cylinder{
+                                            radius 0.02
+                                            height 0.05
+                                          }
+                                          appearance Appearance{
+                                            material Material{
+                                              diffuseColor 0.7 0.9 0.7
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                    Transform {
+                                      translation -0.02 0 0.09 
+                                      children[
+                                        Shape{
+                                          geometry Box{
+                                            size 0.1 0.05 0.18
+                                          }
+                                          appearance Appearance{
+                                            material Material{
+                                              diffuseColor 0.7 0.9 0.7
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                    Transform {
+                                      translation 0.05 0 0.05 
+                                      children[
+                                        Shape{
+                                          geometry Box{
+                                            size 0.05 0.08 0.025
+                                          }
+                                          appearance Appearance{
+                                            material Material{
+                                              diffuseColor 0.7 0.9 0.7
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                    Transform {
+                                      translation 0.06 0 0.045 
+                                      rotation 1 0 0 1.58 
+                                      children[
+                                        Shape{
+                                          geometry Cylinder{
+                                            radius 0.04
+                                            height 0.02
+                                          }
+                                          appearance Appearance{
+                                            material Material{
+                                              diffuseColor 0.7 0.9 0.7
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                                DEF joe Joint {
+                                  jointType "rotate"
+                                  jointId 4
+                                  jointAxis 0.0 1.0 0.0 
+                                  translation 0.04 0 0.04 
+                                  ulimit [0.9 0.0 ]
+                                  llimit [0.0 0.0 ]
+                                  uvlimit [0.0 0.0 ]
+                                  lvlimit [0.0 0.0 ]
+                                  rotorInertia 1.0
+                                  rotorResistor 1.0
+                                  children[
+                                    DEF joe Segment{
+                                      centerOfMass 0.0 0.0 0.0 
+                                      mass 0.0 
+                                      momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                                      children[
+                                        Transform {
+                                          children[
+                                            Shape{
+                                              geometry Cylinder{
+                                                radius 0.01
+                                                height 0.1
+                                              }
+                                              appearance Appearance{
+                                                material Material{
+                                                  diffuseColor 0.9 0.7 0.7
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                        Transform {
+                                          translation 0.015 0 -0.02 
+                                          children[
+                                            Shape{
+                                              geometry Box{
+                                                size 0.03 0.08 0.04
+                                              }
+                                              appearance Appearance{
+                                                material Material{
+                                                  diffuseColor 0.9 0.7 0.7
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                        Transform {
+                                          translation 0.02 0 -0.015 
+                                          rotation 1 0 0 1.58 
+                                          children[
+                                            Shape{
+                                              geometry Cylinder{
+                                                radius 0.04
+                                                height 0.02
+                                              }
+                                              appearance Appearance{
+                                                material Material{
+                                                  diffuseColor 0.9 0.7 0.7
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                                DEF eyeup Joint {
+                                  jointType "rotate"
+                                  jointId 3
+                                  jointAxis 0.0 1.0 0.0 
+                                  translation 0.03 0 0.08 
+                                  ulimit [0.7000000000000001 0.0 ]
+                                  llimit [-0.7000000000000001 0.0 ]
+                                  uvlimit [0.0 0.0 ]
+                                  lvlimit [0.0 0.0 ]
+                                  rotorInertia 1.0
+                                  rotorResistor 1.0
+                                  children[
+                                    DEF eyeup Segment{
+                                      centerOfMass 0.0 0.0 0.0 
+                                      mass 0.0 
+                                      momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                                      children[
+                                        Transform {
+                                          children[
+                                            Shape{
+                                              geometry Cylinder{
+                                                radius 0.02
+                                                height 0.1
+                                              }
+                                              appearance Appearance{
+                                                material Material{
+                                                  diffuseColor 0.8 0.8 0.8
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                        Transform {
+                                          translation 0.03 0 0.015 
+                                          rotation 1 0 0 1.58 
+                                          children[
+                                            Shape{
+                                              geometry Cylinder{
+                                                radius 0.04
+                                                height 0.01
+                                              }
+                                              appearance Appearance{
+                                                material Material{
+                                                  diffuseColor 0.8 0.8 0.8
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                    DEF eyeyaw Joint {
+                                      jointType "rotate"
+                                      jointId 2
+                                      jointAxis 0.0 0.0 1.0 
+                                      translation 0.04 0 0.02 
+                                      ulimit [0.7000000000000001 0.0 ]
+                                      llimit [-0.7000000000000001 0.0 ]
+                                      uvlimit [0.0 0.0 ]
+                                      lvlimit [0.0 0.0 ]
+                                      rotorInertia 1.0
+                                      rotorResistor 1.0
+                                      children[
+                                        DEF eyeyaw Segment{
+                                          centerOfMass 0.0 0.0 0.0 
+                                          mass 0.0 
+                                          momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                                          children[
+                                            Transform {
+                                              translation 0 0 0.005 
+                                              children[
+                                                Shape{
+                                                  geometry Box{
+                                                    size 0.03 0.1 0.01
+                                                  }
+                                                  appearance Appearance{
+                                                    material Material{
+                                                      diffuseColor 1.0 1.0 1.0
+                                                    }
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                            Transform {
+                                              translation 0 0.03 0.03 
+                                              children[
+                                                Shape{
+                                                  geometry Sphere{
+                                                    radius 0.02
+                                                  }
+                                                  appearance Appearance{
+                                                    material Material{
+                                                      diffuseColor 1.0 1.0 1.0
+                                                    }
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                            Transform {
+                                              translation 0 -0.03 0.03 
+                                              children[
+                                                Shape{
+                                                  geometry Sphere{
+                                                    radius 0.02
+                                                  }
+                                                  appearance Appearance{
+                                                    material Material{
+                                                      diffuseColor 1.0 1.0 1.0
+                                                    }
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                            Transform {
+                                              translation 0.02 0.03 0.03 
+                                              rotation 0 0 1 1.58 
+                                              children[
+                                                Shape{
+                                                  geometry Cylinder{
+                                                    radius 0.008
+                                                    height 0.008
+                                                  }
+                                                  appearance Appearance{
+                                                    material Material{
+                                                      diffuseColor 0.1 0.1 0.1
+                                                    }
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                            Transform {
+                                              translation 0.02 -0.03 0.03 
+                                              rotation 0 0 1 1.58 
+                                              children[
+                                                Shape{
+                                                  geometry Cylinder{
+                                                    radius 0.008
+                                                    height 0.008
+                                                  }
+                                                  appearance Appearance{
+                                                    material Material{
+                                                      diffuseColor 0.1 0.1 0.1
+                                                    }
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                        DEF eyelid Joint {
+                                          jointType "rotate"
+                                          jointId 1
+                                          jointAxis 0.0 1.0 0.0 
+                                          translation 0 0 0.03 
+                                          ulimit [0.7000000000000001 0.0 ]
+                                          llimit [-0.7000000000000001 0.0 ]
+                                          uvlimit [0.0 0.0 ]
+                                          lvlimit [0.0 0.0 ]
+                                          rotorInertia 1.0
+                                          rotorResistor 1.0
+                                          children[
+                                            DEF lid Segment{
+                                              centerOfMass 0.0 0.0 0.0 
+                                              mass 0.0 
+                                              momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                                              children[
+                                                Transform {
+                                                  children[
+                                                    Shape{
+                                                      geometry Cylinder{
+                                                        radius 0.02
+                                                        height 0.02
+                                                      }
+                                                      appearance Appearance{
+                                                        material Material{
+                                                          diffuseColor 0.9 0.9 0.7
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                                Transform {
+                                                  translation 0 0.03 0.015 
+                                                  rotation 1 0 0 1.58 
+                                                  children[
+                                                    Shape{
+                                                      geometry Cylinder{
+                                                        radius 0.026
+                                                        height 0.02
+                                                      }
+                                                      appearance Appearance{
+                                                        material Material{
+                                                          diffuseColor 0.9 0.9 0.7
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                                Transform {
+                                                  translation 0 -0.03 0.015 
+                                                  rotation 1 0 0 1.58 
+                                                  children[
+                                                    Shape{
+                                                      geometry Cylinder{
+                                                        radius 0.026
+                                                        height 0.02
+                                                      }
+                                                      appearance Appearance{
+                                                        material Material{
+                                                          diffuseColor 0.9 0.9 0.7
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                                DEF brow Joint {
+                                  jointType "rotate"
+                                  jointId 0
+                                  jointAxis 0.0 1.0 0.0 
+                                  translation 0.04 0 0.15 
+                                  ulimit [0.2 0.0 ]
+                                  llimit [-0.2 0.0 ]
+                                  uvlimit [0.0 0.0 ]
+                                  lvlimit [0.0 0.0 ]
+                                  rotorInertia 1.0
+                                  rotorResistor 1.0
+                                  children[
+                                    DEF brow Segment{
+                                      centerOfMass 0.0 0.0 0.0 
+                                      mass 0.0 
+                                      momentsOfInertia [ 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ]
+                                      children[
+                                        Transform {
+                                          children[
+                                            Shape{
+                                              geometry Cylinder{
+                                                radius 0.01
+                                                height 0.05
+                                              }
+                                              appearance Appearance{
+                                                material Material{
+                                                  diffuseColor 0.9 0.7 0.9
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                        Transform {
+                                          translation 0.035 0 0.01 
+                                          children[
+                                            Shape{
+                                              geometry Box{
+                                                size 0.07 0.01 0.02
+                                              }
+                                              appearance Appearance{
+                                                material Material{
+                                                  diffuseColor 0.9 0.7 0.9
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                        Transform {
+                                          translation 0.06 0.03 0.01 
+                                          children[
+                                            Shape{
+                                              geometry Box{
+                                                size 0.01 0.06 0.01
+                                              }
+                                              appearance Appearance{
+                                                material Material{
+                                                  diffuseColor 0.1 0.1 0.1
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                        Transform {
+                                          translation 0.06 -0.03 0.01 
+                                          children[
+                                            Shape{
+                                              geometry Box{
+                                                size 0.01 0.06 0.01
+                                              }
+                                              appearance Appearance{
+                                                material Material{
+                                                  diffuseColor 0.1 0.1 0.1
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  joints [
+    USE root,
+    USE waist0,
+    USE waist1,
+    USE waist2,
+    USE l0,
+    USE l1,
+    USE l2,
+    USE l3,
+    USE l4,
+    USE l5,
+    USE l6,
+    USE r0,
+    USE r1,
+    USE r2,
+    USE r3,
+    USE r4,
+    USE r5,
+    USE r6,
+    USE n0,
+    USE n1,
+    USE n2,
+    USE joe,
+    USE eyeup,
+    USE eyeyaw,
+    USE eyelid,
+    USE brow,
+  ]
+  segments [
+    USE chair,
+    USE waist0,
+    USE waist1,
+    USE waist1,
+    USE l0,
+    USE j1,
+    USE l2,
+    USE l3,
+    USE l4,
+    USE l5,
+    USE l6,
+    USE r0,
+    USE r1,
+    USE r2,
+    USE r3,
+    USE r4,
+    USE r5,
+    USE r6,
+    USE n0,
+    USE n1,
+    USE n2,
+    USE joe,
+    USE eyeup,
+    USE eyeyaw,
+    USE lid,
+    USE brow,
+  ]
+}

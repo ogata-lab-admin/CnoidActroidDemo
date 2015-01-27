@@ -1,0 +1,260 @@
+items: 
+  id: 0
+  name: "Root"
+  plugin: Base
+  class: RootItem
+  children: 
+    - 
+      id: 1
+      name: "robot"
+      plugin: Body
+      class: BodyItem
+      data: 
+        modelFile: "actroid.yaml"
+        currentBaseLink: "root"
+        rootPosition: [  0.000000,  0.000000,  0.000000 ]
+        rootAttitude: [ 
+           1.000000,  0.000000, -0.000000, 
+           0.000000,  1.000000,  0.000000, 
+           0.000000,  0.000000,  1.000000 ]
+        jointPositions: [ 
+           0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, -0.249615, 
+          -0.000000,  0.000000,  1.800653,  0.000000,  0.019758,  0.000000, -0.249615,  0.000000, -0.000000, 
+           1.800653, -0.000000,  0.019758, -0.000000,  0.000000,  0.000000,  1.000074 ]
+        initialRootPosition: [  0.000000,  0.000000,  0.000000 ]
+        initialRootAttitude: [ 
+           1.000000,  0.000000,  0.000000, 
+           0.000000,  1.000000,  0.000000, 
+           0.000000,  0.000000,  1.000000 ]
+        initialJointPositions: [ 
+           0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+           0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+           0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
+        zmp: [  0.000000,  0.000000,  0.000000 ]
+        selfCollisionDetection: false
+      children: 
+        - 
+          id: 2
+          name: "PoseSeq"
+          plugin: PoseSeq
+          class: PoseSeqItem
+          data: 
+            filename: "PoseSeq.pseq"
+            format: POSE-SEQ-YAML
+views: 
+  "Items": 
+    selected: [ 2, 1 ]
+    checked: [ 1, 2 ]
+    expanded: [ 1, 2 ]
+  "Scene": 
+    walkthrough: false
+    showCollisions: true
+    wireframe: false
+    defaultHeadLight: true
+    defaultHeadLightIntensity: 0.75
+    worldLight: true
+    worldLightIntensity: 0.5
+    worldLightAmbient: 0.3
+    additionalLights: true
+    floorGrid: true
+    floorGridSpan: 10
+    floorGridInterval: 0.5
+    normalVisualization: false
+    normalLength: 0.01
+    coordinateAxes: true
+    showFPS: false
+    useBufferForPicking: true
+    camera: 
+      current: Perspective
+      eye: [ 1.46957, 0.98901, 1.26361 ]
+      direction: [ -0.742603, -0.605008, -0.287238 ]
+      up: [ -0.222688, -0.181427, 0.957859 ]
+      fieldOfView: 0.6978
+      near: 0.01
+      far: 10000
+      orthoHeight: 1.28082
+    backgroundColor: [ 0.1, 0.1, 0.3 ]
+    gridColor: [ 0.9, 0.9, 0.9, 1 ]
+  "Multi Value Seq": 
+    mode: view
+    editMode: freeLine
+    original: true
+    velocity: false
+    acceleration: false
+    limits: true
+    grid: true
+    gridWidth: 0.2
+    gridHeight: 0.2
+    lineWidth: 1
+    rulers: false
+    sync: true
+    controlPointStep: 1
+    controlPointOffset: 0
+    controlPointHeighlight: false
+    scrollMode: continuous
+    lower: -10
+    upper: 10
+  "Multi SE3 Seq": 
+    mode: view
+    editMode: freeLine
+    original: true
+    velocity: false
+    acceleration: false
+    limits: true
+    grid: true
+    gridWidth: 0.2
+    gridHeight: 0.2
+    lineWidth: 1
+    rulers: false
+    sync: true
+    controlPointStep: 1
+    controlPointOffset: 0
+    controlPointHeighlight: false
+    scrollMode: continuous
+    lower: -10
+    upper: 10
+    visibleElements: [ 0, 1, 2 ]
+  "Links": 
+    listingMode: "Part Tree"
+    currentBodyItem: 1
+    bodyItems: 
+      - 
+        id: 1
+        selectedLinks: [ 10 ]
+        expandedParts: [ "L-ARM" ]
+  "Body / Link": 
+    showRotationMatrix: false
+  "Joint Sliders": 
+    showAllJoints: true
+    jointId: false
+    name: true
+    numColumns: 1
+    spinBox: true
+    slider: true
+    labelOnLeft: true
+    currentBodyItem: 1
+  "Joint Trajectories": 
+    mode: view
+    editMode: freeLine
+    original: true
+    velocity: false
+    acceleration: false
+    limits: true
+    grid: true
+    gridWidth: 0.2
+    gridHeight: 0.2
+    lineWidth: 1
+    rulers: false
+    sync: true
+    controlPointStep: 1
+    controlPointOffset: 0
+    controlPointHeighlight: false
+    scrollMode: continuous
+    lower: -10
+    upper: 10
+  "Multi Affine3 Seq": 
+    mode: view
+    editMode: freeLine
+    original: true
+    velocity: false
+    acceleration: false
+    limits: true
+    grid: true
+    gridWidth: 0.2
+    gridHeight: 0.2
+    lineWidth: 1
+    rulers: false
+    sync: true
+    controlPointStep: 1
+    controlPointOffset: 0
+    controlPointHeighlight: false
+    scrollMode: continuous
+    lower: -10
+    upper: 10
+    visibleElements: [ 0, 1, 2 ]
+  "Media": 
+    keepAspectRatio: true
+    keepOriginalSize: true
+  "Pose Roll": 
+    currentPoseSeqItem: 2
+    defaultTransitionTime: 0
+    updateAll: true
+    autoUpdate: false
+    timeSync: true
+    listingMode: "Part Tree"
+    timeLength: 18
+    showLipSync: false
+    gridInterval: 1
+toolbars: 
+  "TimeBar": 
+    minTime: 0
+    maxTime: 30
+    frameRate: 100
+    playbackFrameRate: 50
+    idleLoopDrivenMode: false
+    currentTime: 20.01
+    speedScale: 1
+    syncToOngoingUpdates: false
+  "BodyMotionGenerationBar": 
+    balancer: false
+    autoGeneration: false
+    timeScaleRatio: 1
+    preInitialDuration: 1
+    postFinalDuration: 1
+    onlyTimeBarRange: false
+    makeNewBodyItem: true
+    stealthyStepMode: true
+    stealthyHeightRatioThresh: 2
+    flatLiftingHeight: 0.005
+    flatLandingHeight: 0.005
+    impactReductionHeight: 0.005
+    impactReductionTime: 0.04
+    autoZmp: true
+    minZmpTransitionTime: 0.1
+    zmpCenteringTimeThresh: 0.03
+    zmpTimeMarginBeforeLiftingSpin: 0
+    zmpMaxDistanceFromCenter: 0.02
+    allLinkPositions: false
+    lipSyncMix: false
+    timeToStartBalancer: 0
+    balancerIterations: 2
+    plainBalancerMode: false
+    boundaryConditionType: position
+    boundarySmootherType: quintic
+    boundarySmootherTime: 0.5
+    boundaryCmAdjustment: false
+    boundaryCmAdjustmentTime: 1
+    waistHeightRelaxation: false
+    gravity: 9.8
+    dynamicsTimeRatio: 1
+  "BodyBar": 
+    current: 1
+    stanceWidth: 0.15
+  "KinematicsBar": 
+    mode: AUTO
+    attitude: false
+    penetrationBlock: true
+    collisionLinkHighlight: false
+    snapDistance: 0.025
+    penetrationBlockDepth: 0.0005
+    lazyCollisionDetectionMode: true
+Base: 
+  "MovieGenerator": 
+    directory: 
+    basename: scene
+    begin: 0
+    fps: 30
+    width: 640
+    heiht: 480
+Body: 
+  "BodyMotionEngine": 
+    updateJointVelocities: false
+  "KinematicFaultChecker": 
+    checkJointPositions: true
+    angleMargin: 0
+    translationMargin: 0
+    checkJointVelocities: true
+    velocityLimitRatio: 100
+    targetJoints: all
+    checkSelfCollisions: true
+    onlyTimeBarRange: false
